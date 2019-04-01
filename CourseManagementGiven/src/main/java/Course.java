@@ -83,8 +83,27 @@ public class Course {
     // if student with the name (asurite member) is not yet included student needs to be added to student list 
     // sets points for a student 
     public void set_points(String name, int points) {
-    	System.out.println(points);
-        this.points.put(name, points);
+    	
+    	// Check if student is already on student list
+    	boolean studentIsOnList = false;
+    	for(Student studentName: students) {
+    		if(studentName.getAsurite() == name) {
+    			studentIsOnList = true;
+    		}
+    	}
+    	
+    	if(studentIsOnList) {
+    		System.out.println(points);
+            this.points.put(name, points);
+    	}
+    	else {
+    		// Create new student
+    		Student newStudent = new Student(name, null);
+    		// Add student to the student list
+    		addStudent(newStudent);
+    		System.out.println(points);
+            this.points.put(name, points);
+    	}	
     }
     
     
@@ -92,9 +111,25 @@ public class Course {
     // Students should only be added when they are not yet in the course (names (asurite member) needs to be unique)
     ArrayList<Student> students  = new ArrayList<Student>();
     public boolean addStudent(Student s) {
-        students.add(s);
-        points.put(s.getAsurite(), -1);
-        return true;
+    	
+    	// Check if student is already in the course
+    	boolean studentIsOnList = false;
+    	for(Student studentTest: students) {
+    		if(studentTest == s) {
+    			studentIsOnList = true;
+    		}
+    	}
+    	
+    	if(studentIsOnList) {
+            students.add(s);
+            points.put(s.getAsurite(), -1);
+            return true;
+    	}
+    	else {
+    		// student not found
+            return false;
+    	}	   
+        
     }
 
 
