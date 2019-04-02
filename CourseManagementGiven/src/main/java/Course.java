@@ -51,18 +51,21 @@ public class Course {
          int counter = 0;
          int min = Integer.MAX_VALUE;
          int max = Integer.MIN_VALUE;
-         if(collection.size() == 1)
+         if(collection.size() == 1) {
+        	System.out.println("55: "+collection.get(0));
             return collection.get(0);
-        
+         }
         else if(collection.size() == 2 ){
+        	System.out.println("60: "+(double)(collection.get(0) + collection.get(1))/2);
             return (double)(collection.get(0) + collection.get(1))/2;
         }
         else {
             int allPoints = 0;
             for(int point: collection){
                 if (point >= 0) {
-                    
-                    counter = counter++;
+                    //SER316-start
+                    counter++;
+                    //SER316-end
                     if (point < min){
                         min = point;
                     }
@@ -73,9 +76,16 @@ public class Course {
                 }
             }
             
-            int totalPoints = allPoints-max-min;
-                return totalPoints/(double)(counter-1); 
+            //SER316-start
+            if(counter == 0)
+            	return 0;
+            if(counter == 2)
+            	return allPoints/2;
 
+            int totalPoints = allPoints-max-min;
+            System.out.println("***"+totalPoints/(double)(counter-2));
+            return totalPoints/(double)(counter-2); 
+          //SER316-end
         }
     }
     
@@ -83,7 +93,7 @@ public class Course {
     // if student with the name (asurite member) is not yet included student needs to be added to student list 
     // sets points for a student 
     public void set_points(String name, int points) {
-    	
+    	// SER316-start
     	// Check if student is already on student list
     	boolean studentIsOnList = false;
     	for(Student studentName: students) {
@@ -101,6 +111,8 @@ public class Course {
     		Student newStudent = new Student(name, null);
     		// Add student to the student list
     		addStudent(newStudent);
+    		// SER316-end
+    		
     		System.out.println(points);
             this.points.put(name, points);
     	}	
@@ -111,25 +123,29 @@ public class Course {
     // Students should only be added when they are not yet in the course (names (asurite member) needs to be unique)
     ArrayList<Student> students  = new ArrayList<Student>();
     public boolean addStudent(Student s) {
-    	
+    	// SER316-start
     	// Check if student is already in the course
     	boolean studentIsOnList = false;
     	for(Student studentTest: students) {
-    		if(studentTest == s) {
+    		if(studentTest.getAsurite() == s.getAsurite()) {
     			studentIsOnList = true;
     		}
     	}
     	
     	if(studentIsOnList) {
-            students.add(s);
+    		// SER316-end
+            
             points.put(s.getAsurite(), -1);
             return true;
+            // SER-start
     	}
     	else {
     		// student not found
+    		students.add(s);
+            points.put(s.getAsurite(), -1);
             return false;
+            // SER-end
     	}	   
-        
     }
 
 
