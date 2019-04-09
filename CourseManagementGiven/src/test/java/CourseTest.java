@@ -14,7 +14,7 @@ public class CourseTest {
 	Course fourStudent;
 	Course threeStudent;
 	Course twoStudent;
-	Course oneStudent;
+    Course oneStudent;
     Course zeroStudent;
     Course onePoint;
     Course twoPoint;
