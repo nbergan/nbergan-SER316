@@ -16,7 +16,7 @@ public class GivenWhiteBox {
     public void setUp() throws Exception {
     }
 
-
+    
     @Test
     public void testAverageWithoutMinWithoutMax() {
         // One Student

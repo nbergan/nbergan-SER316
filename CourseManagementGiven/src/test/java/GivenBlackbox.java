@@ -26,7 +26,7 @@ import java.lang.reflect.Constructor;
 public class GivenBlackbox {
     private Class<Course> classUnderTest;
     
-    
+   
     @SuppressWarnings("unchecked")
     public GivenBlackbox(Object classUnderTest) {
         this.classUnderTest = (Class<Course>) classUnderTest;
